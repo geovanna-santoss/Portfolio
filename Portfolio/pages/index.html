@@ -5,15 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfólio</title>
     <link rel="stylesheet" href="/Portfolio/styles/style.css">
+    <!-- Importe do Bulma FrameWork de css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
 </head>
 <body>
-    <main>
-        <nav>
+    <main> 
+        <!-- Na navegação: Troca de modo escuro e claro, volta pra home inicial -->
+        <nav>  
+            <button class="button is-rounded is-small">Modo claro</button>
+            <p id="DiaSemana"></p>
+        </nav>
+        <!-- Seção principal: Blocos para modais com cada tema da lista: Sobre mim, formatura, projetos e links e contatos -->
+        <section>
             <ul>
                 <li><a href="#MinhaBio">Sobre mim</a></li>
-                <li><a href="#AnoFormatura">Tempo para formatura</a></li>
+                <li><a href="#AnoFormatura">Timer de formatura</a></li>
+                <li><a href="#Projetos">Projetos</a></li>
+                <li><a href="#LinksEContato">Contato</a></li>
             </ul>
-        </nav>
+        </section>
 
         <p id="MeuNome"></p>
         <p id="TituloProfissional"></p>
@@ -24,6 +34,13 @@
         <p id="TempoPorcentagemFormatura"></p>
         <p id="TempoRestanteFormatura"></p>
     </main>
+
+    <!-- Rodapé -->
+    <footer class="footer" > 
+        <div class="content has-text-centered">
+            <p> © 2025 Geovanna Santos - Portfólio profissional</p>
+        </div>
+    </footer>
     <script src="/Portfolio/scripts/script.js"></script>
 </body>
 </html>
