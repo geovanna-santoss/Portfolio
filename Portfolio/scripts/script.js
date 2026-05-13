@@ -25,10 +25,36 @@ let curso = {
     disciplinaAtual: "Linguagem de programação"
 };
 
+const habilidades = [
+    "Python",
+    "HTML e CSS básicos",
+    "JavaScript",
+    "GitHub e Git",
+    "Mysql",
+    "Lógica de programação",
+];
+//  Funçaõ para mostrar as habilidades com o loop do while
+function mostrarHabilidades() {
+    const container = document.getElementById("Habilidades");
+    if (!container) return;
+    // Lista para exibir no HTML
+    const lista = document.createElement("ul");
+    let i = 0;
+    do {
+        const item = document.createElement("li");
+        item.innerText = habilidades[i];
+        lista.appendChild(item);
+        i++;
+    } while (i < habilidades.length);
+
+    container.innerHTML = "<h3>Habilidades</h3>";
+    container.appendChild(lista);
+}
+
 // console.log para exibir informações no console/terminal
 console.log(typeof nulo);
 console.log(typeof indefinido);
-console.log(typeof AnoFormatura);
+console.log(typeof AnoFormatura);git 
 console.log(typeof MinhaBio);
 console.log(typeof TituloProfissional);
 console.log(typeof NOME);
@@ -38,10 +64,10 @@ console.log(typeof curso);
 document.getElementById("MeuNome").innerText = NOME;
 document.getElementById("TituloProfissional").innerText = TituloProfissional;
 document.getElementById("MinhaBio").innerText = MinhaBio;
+mostrarHabilidades();
 document.getElementById("AnoFormatura").innerText = "Ano de formatura: " + AnoFormatura;
 document.getElementById("TempoPercorrido").innerText = `Tempo de curso percorrido:\n ${AnoAtual - AnoIngresso} anos, ${MesAtual - MesIngresso} meses e ${DiaAtual - DiaIngresso} dias.`;
 document.getElementById("TempoPorcentagemFormatura").innerText = `Porcentagem de conclusão: ${Math.round(((AnoAtual - AnoIngresso) + (MesAtual - MesIngresso) / 12 + (DiaAtual - DiaIngresso) / 365) / ((AnoFormatura - AnoIngresso) + (MesFormatura - MesIngresso) / 12 + (DiaFormatura - DiaIngresso) / 365) * 100)}%`;
-
 
 let DiasRestantes  = DiaFormatura - DiaAtual;
 let MesesRestantes = MesFormatura - MesAtual;
@@ -79,3 +105,26 @@ switch (DiaSemana) {
     default: DiaEscrito = "Dia inválido";
 }
 document.getElementById("DiaSemana").innerText = `Hoje é ${DiaEscrito}, ${DiaAtual}/${MesAtual}/${AnoAtual}.`;
+
+projetos = [
+    {nome :"Aplicação de Estacionamento",
+     tecnologias :["Python", "Tkinter","fpdf2"],
+     conhecimentos :"VsCode, GtiHub, pip, PyInstaller, PyPDF2",
+     descricao :"Aplicação desktop para controle de estacionamento, com geração de recibos em PDF e interface gráfica para cadastro de veículos e controle de vagas.",
+    },
+
+    {nome:"Site de buscar de letras musicais",
+     tecnologias :["HTML", "CSS", "JavaScript", "GitHub", "NodeJS", "API local"], 
+     conhecimentos :"VsCode, GitHub, npm, Express, API local, Fetch API",
+     descricao :"Site para buscar letras de músicas, utilizando uma API local para armazenar as letras e tecnologias web para criar a interface do usuário, permitindo a busca de letras, visualição de artistas e álbuns.",
+    },
+
+    {nome:"Calculadora Web básica",
+     tecnologias:["HTML", "CSS", "JavaScript","GitHub"],
+     conhecimentos:"VsCode, GitHub, HTML, CSS, JavaScript",
+     descricao:"Site de calculadora básica, com interface simples e funcional, permitindo a realização de operações matemáticas básicas.",
+    }
+];
+// Teste de exibição no console
+console.log("Projetos definidos:", projetos);
+console.table(projetos);
