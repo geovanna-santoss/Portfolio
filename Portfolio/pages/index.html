@@ -7,37 +7,82 @@
     <link rel="stylesheet" href="../styles/style.css">
 </head>
 <body>
-    <main> 
-        <!-- Seção principal: Blocos para modais com cada tema da lista: Sobre mim, formatura, projetos e links e contatos -->
-        <section>
-            <ul>
-                <li><a href="#MinhaBio">Sobre mim</a></li>
-                <li><a href="#AnoFormatura">Timer de formatura</a></li>
-                <li><a href="#Projetos">Projetos</a></li>
-                <li><a href="#LinksEContato">Contato</a></li>
-            </ul>
-        </section>
+    <header> 
+        <!-- Para exibir a data atual -->
+        <div id="today"></div>
+    </header>
+    <main>
+        <!-- Organização de modais com conteúdo -->
+        <div class="screen-shell">
+            <div class="screen-frame">
+                <div class="screen-message">
+                    <h1>Olá! Meu nome é Geovanna</h1>
+                    <p>Escolha uma aba para começar.</p>
+                </div>
+                <section class="modal-menu" aria-label="Menu de modais">
+                    <button type="button" data-modal="aboutModal">Sobre mim</button>
+                    <button type="button" data-modal="projectsModal">Projetos</button>
+                    <button type="button" data-modal="linksModal">Links</button>
+                    <button type="button" data-modal="contactModal">Contato</button>
+                </section>
+            </div>
+        </div>
 
-        <p id="MeuNome"></p>
-        <p id="TituloProfissional"></p>
-        <p id="MinhaBio"></p>
-        <div id="Habilidades"></div>
+        <div id="modalOverlay" class="modal-overlay hidden" aria-hidden="true"></div>
+        <!-- Especificação do conteúdo de cada modal para definição de id's necessários -->
+         <!-- Sobre mim -->
+        <div id="aboutModal" class="modal hidden" aria-hidden="true">
+            <div class="modal-content perfil">
+                <button class="modal-close" aria-label="Fechar modal">×</button>
+                <h2>Sobre mim</h2>
+                <p id="name" class="profile-name"></p>
+                <p id="jobTitle" class="profile-title"></p>
+                <p id="bio" class="profile-bio"></p>
+                <div id="skills"></div>
+                <section class="time-info">
+                    <p id="gradYear"></p>
+                    <p id="timeElapsed"></p>
+                    <p id="completionRate"></p>
+                    <p id="timeLeft"></p>
+                </section>
+            </div>
+        </div>
 
-        <p id="AnoFormatura"></p>
-        <p id="TempoPercorrido"></p>
-        <p id="TempoPorcentagemFormatura"></p>
-        <p id="TempoRestanteFormatura"></p>
-        <p id="DiaSemana"></p>
+        <div id="projectsModal" class="modal hidden" aria-hidden="true">
+            <!-- Projetos -->
+            <div class="modal-content">
+                <button class="modal-close" aria-label="Fechar modal">×</button>
+                <h2>Projetos</h2>
+                <div id="projects"></div>
+            </div>
+        </div>
 
-        <p id="Projetos"></p>
+        <div id="linksModal" class="modal hidden" aria-hidden="true">
+            <!-- Links -->
+            <div class="modal-content">
+                <button class="modal-close" aria-label="Fechar modal">×</button>
+                <h2>Links</h2>
+                <div id="linkList"></div>
+            </div>
+        </div>
+
+        <div id="contactModal" class="modal hidden" aria-hidden="true">
+            <!-- Contato -->
+            <div class="modal-content">
+                <button class="modal-close" aria-label="Fechar modal">×</button>
+                <h2>Contato</h2>
+                <div id="contactList"></div>
+            </div>
+        </div>
     </main>
 
     <!-- Rodapé -->
-    <footer> 
+    <footer>
         <div>
-            <p> © 2025 Geovanna Santos - Portfólio profissional</p>
+            <p> © Geovanna Santos - Portfólio profissional</p>
         </div>
     </footer>
-    <script src="../scripts/script.js"></script>
+    <!-- Definindo type do script para importar todos os arquivos presentes na pasta script -->
+    <script type="module" src="../scripts/script.js"></script>
 </body>
 </html>
