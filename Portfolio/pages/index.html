@@ -3,86 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfólio</title>
+    <title>Geovanna Santos — Portfólio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles/style.css">
 </head>
 <body>
-    <header> 
-        <!-- Para exibir a data atual -->
-        <div id="today"></div>
-    </header>
-    <main>
-        <!-- Organização de modais com conteúdo -->
-        <div class="screen-shell">
-            <div class="screen-frame">
-                <div class="screen-message">
-                    <h1>Olá! Meu nome é Geovanna</h1>
-                    <p>Escolha uma aba para começar.</p>
-                </div>
-                <section class="modal-menu" aria-label="Menu de modais">
-                    <button type="button" data-modal="aboutModal">Sobre mim</button>
-                    <button type="button" data-modal="projectsModal">Projetos</button>
-                    <button type="button" data-modal="linksModal">Links</button>
-                    <button type="button" data-modal="contactModal">Contato</button>
-                </section>
-            </div>
+
+    <!-- Topbar estilo macOS -->
+    <div id="topbar">
+        <div class="tb-center">
+            <span id="today"></span>
+        </div>
+        <div class="tb-right">
+            <button id="dm-toggle" aria-label="alternar tema">
+                <span class="dm-icon">◐</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Desktop principal -->
+    <main id="desktop" role="main">
+
+        <!-- Mensagem inicial -->
+        <div class="welcome-card" id="welcome">
+            <p class="welcome-eyebrow">Bem-vindo ao meu portfólio!</p>
+            <h1 class="welcome-title">Olá! Sou a <em>Geovanna Santos</em></h1>
+            <p class="welcome-sub">escolha uma aba abaixo para começar ↓</p>
+            <div class="welcome-cursor"></div>
         </div>
 
-        <div id="modalOverlay" class="modal-overlay hidden" aria-hidden="true"></div>
-        <!-- Especificação do conteúdo de cada modal para definição de id's necessários -->
-         <!-- Sobre mim -->
-        <div id="aboutModal" class="modal hidden" aria-hidden="true">
-            <div class="modal-content perfil">
-                <button class="modal-close" aria-label="Fechar modal">×</button>
-                <h2>Sobre mim</h2>
-                <p id="name" class="profile-name"></p>
-                <p id="jobTitle" class="profile-title"></p>
-                <p id="bio" class="profile-bio"></p>
-                <div id="skills"></div>
-                <section class="time-info">
-                    <p id="gradYear"></p>
-                    <p id="timeElapsed"></p>
-                    <p id="completionRate"></p>
-                    <p id="timeLeft"></p>
-                </section>
-            </div>
-        </div>
+        <!-- Container onde as janelas são renderizadas -->
+        <div id="windows-container"></div>
 
-        <div id="projectsModal" class="modal hidden" aria-hidden="true">
-            <!-- Projetos -->
-            <div class="modal-content">
-                <button class="modal-close" aria-label="Fechar modal">×</button>
-                <h2>Projetos</h2>
-                <div id="projects"></div>
-            </div>
-        </div>
-
-        <div id="linksModal" class="modal hidden" aria-hidden="true">
-            <!-- Links -->
-            <div class="modal-content">
-                <button class="modal-close" aria-label="Fechar modal">×</button>
-                <h2>Links</h2>
-                <div id="linkList"></div>
-            </div>
-        </div>
-
-        <div id="contactModal" class="modal hidden" aria-hidden="true">
-            <!-- Contato -->
-            <div class="modal-content">
-                <button class="modal-close" aria-label="Fechar modal">×</button>
-                <h2>Contato</h2>
-                <div id="contactList"></div>
-            </div>
-        </div>
     </main>
 
-    <!-- Rodapé -->
-    <footer>
-        <div>
-            <p> © Geovanna Santos - Portfólio profissional</p>
+    <!-- Dock de navegação -->
+    <nav id="dock" aria-label="Menu principal">
+        <button class="dock-item" data-modal="aboutModal" aria-label="Abrir sobre mim">
+            <span class="dock-icon">✦</span>
+            <span class="dock-label">sobre mim</span>
+            <span class="dock-dot"></span>
+        </button>
+        <button class="dock-item" data-modal="projectsModal" aria-label="Abrir projetos">
+            <span class="dock-icon">⬡</span>
+            <span class="dock-label">projetos</span>
+            <span class="dock-dot"></span>
+        </button>
+        <button class="dock-item" data-modal="linksModal" aria-label="Abrir links">
+            <span class="dock-icon">◈</span>
+            <span class="dock-label">links</span>
+            <span class="dock-dot"></span>
+        </button>
+        <button class="dock-item" data-modal="contactModal" aria-label="Abrir contato">
+            <span class="dock-icon">◎</span>
+            <span class="dock-label">contato</span>
+            <span class="dock-dot"></span>
+        </button>
+    </nav>
+
+    <!-- Conteúdo dos modais e templates base-->
+    <template id="tpl-aboutModal">
+        <div class="win-section about-grid">
+            <div class="about-avatar" id="about-avatar">GS</div>
+            <div class="about-info">
+                <p id="name" class="profile-name"></p>
+                <p id="jobTitle" class="profile-title"></p>
+            </div>
         </div>
-    </footer>
-    <!-- Definindo type do script para importar todos os arquivos presentes na pasta script -->
+        <div class="win-divider"></div>
+        <p id="bio" class="profile-bio win-section"></p>
+        <div class="win-divider"></div>
+        <div class="win-section">
+            <p class="win-label">habilidades</p>
+            <div id="skills" class="skills-wrap"></div>
+        </div>
+        <div class="win-divider"></div>
+        <section class="win-section time-info" aria-label="Informações de tempo">
+            <p id="gradYear"></p>
+            <p id="timeElapsed"></p>
+            <p id="completionRate"></p>
+            <p id="timeLeft"></p>
+        </section>
+    </template>
+
+    <template id="tpl-projectsModal">
+        <div class="win-section">
+            <div id="projects" class="projects-list"></div>
+        </div>
+    </template>
+
+    <template id="tpl-linksModal">
+        <div class="win-section">
+            <div id="linkList" class="links-grid"></div>
+        </div>
+    </template>
+
+    <template id="tpl-contactModal">
+        <div class="win-section">
+            <p class="win-label">vamos conversar?</p>
+            <div id="contactList" class="contact-list"></div>
+        </div>
+    </template>
+
     <script type="module" src="../scripts/script.js"></script>
 </body>
 </html>
