@@ -1,11 +1,13 @@
 import { DATA, academicDates } from "./data.js";
 import { getCurrentDate, getTimeElapsed, getCompletionPercentage, getRemainingTime } from "./timer.js";
+
 // Configações globais das janelas/modais
 const WINDOWS_CONFIG = {
-    aboutModal:    { title: "sobre mim",   sub: "Quem sou eu",  w: 360, h: 420, ox: 40,  oy: 30  },
+    aboutModal:    { title: "sobre mim",   sub: "Quem sou eu",  w: 400, h: 420, ox: 40,  oy: 30  },
     projectsModal: { title: "projetos",    sub: "Meus projetos", w: 400, h: 420, ox: 200, oy: 50  },
-    linksModal:    { title: "links",       sub: "Minhas redes sociais",  w: 340, h: 280, ox: 100, oy: 200 },
-    contactModal:  { title: "contato",     sub: "Fale comigo!",  w: 320, h: 260, ox: 300, oy: 180 }
+    linksModal:    { title: "links",       sub: "Minhas redes sociais",  w: 300, h: 200, ox: 100, oy: 100 },
+    contactModal:  { title: "contato",     sub: "Fale comigo!",  w: 100, h: 80, ox: 300, oy: 180 },
+    uselessModal:  { title: "Fun fact", w: 180, h: 120, ox: 100, oy: 50 }
 };
 
 const state = {
@@ -13,6 +15,12 @@ const state = {
     zCounter: 10,
     dragging: null
 };
+  
+// Função de busca rápida para setar texto em um elemento filho por ID dentro de um container
+function setTextById(container, id, text) {
+    const el = container.querySelector(`#${id}`);
+    if (el) el.textContent = text;
+}
 
 // Função para abrir uma janela
 function openWindow(id) {
@@ -203,6 +211,7 @@ function populateWindow(id, body) {
         case "projectsModal": populateProjects(body); break;
         case "linksModal":    populateLinks(body);    break;
         case "contactModal":  populateContact(body);  break;
+        case "uselessModal":  populateUseless(body);  break;
     }
 }
 
@@ -224,8 +233,15 @@ function populateAbout(body) {
     setTextById(body, "gradYear", `Previsão de formatura: ${DATA.gradYear}`);
     setTextById(body, "timeElapsed", `Tempo desde ingresso: ${elapsed.years} anos, ${elapsed.months} meses e ${elapsed.days} dias`);
     setTextById(body, "completionRate", `Progresso estimado: ${getCompletionPercentage(academicDates.ingresso, academicDates.formatura, getCurrentDate())}%`);
-    // Condicional reduzida para mostrar dias restantes ou mensagem de formatura
-    setTextById(body, "timeLeft", getRemainingTime() > 0 ? `${getRemainingTime()} dias até a formatura` : `Já formada! 🎉`);
+    // Condicional de dias restantes para formatura
+    const tempoRestante = getRemainingTime(getCurrentDate(), academicDates.formatura);
+    if (tempoRestante.completed) {
+         setTextById(body, "timeLeft", `Já formada! 🎉`);
+    } else {
+    // Calcula total de dias a partir do objeto
+         const totalDias = (tempoRestante.years * 365) + (tempoRestante.months * 30) + tempoRestante.days;
+         setTextById(body, "timeLeft", `${totalDias} dias até a formatura`);
+    };
 }
 
 function populateProjects(body) {
@@ -273,6 +289,32 @@ function populateContact(body) {
     `).join("");
 }
 
+// Função para buscar e exibir um fato inútil usando a API
+function populateUseless(body) {
+  const el = body.querySelector("#fato");
+  
+  if (!el) {
+    console.error("Elemento #fato não encontrado no modal");
+    return;
+  }
+  
+  // Buscar o fato quando o modal abrir
+  el.textContent = 'Carregando curiosidade inútil :P ...';
+  
+  fetch('https://uselessfacts.jsph.pl/api/v2/facts/random?language=en')
+    .then(res => {
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return res.json();
+    })
+    .then(fato => {
+      el.textContent = fato.text;
+    })
+    .catch(error => {
+      console.error('Erro:', error);
+      el.textContent = 'Erro ao carregar fato :( Tente novamente.';
+    });
+}
+
 // Topbar — relógio + data atual
 function updateClock() {
     const el = document.getElementById("today");
@@ -308,6 +350,7 @@ function initDock() {
         });
     });
 }
+
 // Evento de ínicio para configurar relógio, modo escuro e dock após o DOM estar carregado
 document.addEventListener("DOMContentLoaded", () => {
     updateClock();

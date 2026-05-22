@@ -41,7 +41,7 @@ export const DATA = {
 
     contact: [
     {   icon:"",
-        type: "Email",
+        label: "Email",
         value: "geosant.dev@gmail.com"
     }
     ],

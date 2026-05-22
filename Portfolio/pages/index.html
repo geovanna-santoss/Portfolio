@@ -20,7 +20,10 @@
             <button id="dm-toggle" aria-label="alternar tema">
                 <span class="dm-icon">◐</span>
             </button>
-        </div>
+            <button id="useless" class="dock-item" data-modal="uselessModal" aria-label="useless button">
+                <span class="dm-icon">⎘</span>
+            </button>
+        </div>  
     </div>
 
     <!-- Desktop principal -->
@@ -64,6 +67,11 @@
     </nav>
 
     <!-- Conteúdo dos modais e templates base-->
+    <template id="tpl-uselessModal">
+        <div class="win-section">
+            <p id="fato" class="project-card"></p>
+        </div>
+    </template>
     <template id="tpl-aboutModal">
         <div class="win-section about-grid">
             <div class="about-avatar" id="about-avatar">GS</div>
@@ -102,11 +110,12 @@
 
     <template id="tpl-contactModal">
         <div class="win-section">
-            <p class="win-label">vamos conversar?</p>
+            <p class="win-label">Converse comigo pelo Email!</p>
             <div id="contactList" class="contact-list"></div>
         </div>
     </template>
 
     <script type="module" src="../scripts/script.js"></script>
+    <script type="module" src="../scripts/api.js"></script>
 </body>
 </html>
