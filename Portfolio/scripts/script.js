@@ -3,11 +3,11 @@ import { getCurrentDate, getTimeElapsed, getCompletionPercentage, getRemainingTi
 
 // Configações globais das janelas/modais
 const WINDOWS_CONFIG = {
-    aboutModal:    { title: "sobre mim",   sub: "Quem sou eu",  w: 400, h: 420, ox: 40,  oy: 30  },
-    projectsModal: { title: "projetos",    sub: "Meus projetos", w: 400, h: 420, ox: 200, oy: 50  },
-    linksModal:    { title: "links",       sub: "Minhas redes sociais",  w: 300, h: 200, ox: 100, oy: 100 },
-    contactModal:  { title: "contato",     sub: "Fale comigo!",  w: 100, h: 80, ox: 300, oy: 180 },
-    uselessModal:  { title: "Fun fact", w: 180, h: 120, ox: 100, oy: 50 }
+    aboutModal:    { title: "Sobre mim",   sub: "Apresentação breve sobre mim",  w: 400, h: 420, ox: 40,  oy: 30  },
+    projectsModal: { title: "Meus projetos",    sub: "Meus projetos", w: 400, h: 420, ox: 200, oy: 50  },
+    linksModal:    { title: "Links",       sub: "Minhas redes sociais",  w: 300, h: 200, ox: 100, oy: 100 },
+    contactModal:  { title: "Contato",     sub: "Fale comigo!",  w: 100, h: 80, ox: 300, oy: 180 },
+    uselessModal:  { title: "Você sabia?",    sub: "Curiosidade inútil", w: 180, h: 120, ox: 100, oy: 50 }
 };
 
 const state = {
@@ -220,13 +220,20 @@ function populateAbout(body) {
     setTextById(body, "jobTitle", DATA.jobTitle);
     setTextById(body, "bio", DATA.bio);
 
+     const avatarEl = body.querySelector("#about-avatar");
+    if (avatarEl && DATA.avatar) {
+        avatarEl.style.backgroundImage = `url(${DATA.avatar})`;
+        avatarEl.style.backgroundSize = 'cover';
+        avatarEl.style.backgroundPosition = 'center';
+        avatarEl.textContent = ''; // Remove as iniciais "GS"
+    }
+
     const skillsEl = body.querySelector("#skills");
     if (skillsEl) {
         skillsEl.innerHTML = DATA.skills
             .map(s => `<span class="skill-tag">${s}</span>`)
             .join("");
     }
-
 
     // Info de formação/tempo
     const elapsed = getTimeElapsed(academicDates.ingresso, getCurrentDate());
@@ -236,7 +243,7 @@ function populateAbout(body) {
     // Condicional de dias restantes para formatura
     const tempoRestante = getRemainingTime(getCurrentDate(), academicDates.formatura);
     if (tempoRestante.completed) {
-         setTextById(body, "timeLeft", `Já formada! 🎉`);
+         setTextById(body, "timeLeft", `Já formada!`);
     } else {
     // Calcula total de dias a partir do objeto
          const totalDias = (tempoRestante.years * 365) + (tempoRestante.months * 30) + tempoRestante.days;
@@ -266,7 +273,9 @@ function populateLinks(body) {
     if (!el) return;
     el.innerHTML = DATA.links.map(l => `
         <a class="link-item" href="${l.url}" target="_blank" rel="noopener">
-            <span class="link-icon">${l.icon}</span>
+            <span class="link-icon">
+                <i class="${l.icon}" style="color: ${l.iconColor || 'var(--text)'};"></i>
+            </span>
             <div>
                 <div class="link-name">${l.name}</div>
                 <div class="link-handle">${l.handle}</div>
@@ -280,7 +289,9 @@ function populateContact(body) {
     if (!el) return;
     el.innerHTML = DATA.contact.map(c => `
         <div class="contact-item">
-            <div class="contact-icon-wrap">${c.icon}</div>
+            <div class="contact-icon-wrap">
+                <i class="${c.icon}" style="color: ${c.iconColor || 'var(--text)'};"></i>
+            </div>
             <div>
                 <div class="contact-label">${c.label}</div>
                 <div class="contact-val">${c.value}</div>
@@ -298,16 +309,29 @@ function populateUseless(body) {
     return;
   }
   
-  // Buscar o fato quando o modal abrir
   el.textContent = 'Carregando curiosidade inútil :P ...';
+  
+  let fatoOriginal = '';
   
   fetch('https://uselessfacts.jsph.pl/api/v2/facts/random?language=en')
     .then(res => {
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       return res.json();
     })
-    .then(fato => {
-      el.textContent = fato.text;
+    .then(data => {
+      fatoOriginal = data.text || "Fato não encontrado :(";
+      
+      // API para tradução
+      return fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(fatoOriginal)}&langpair=en|pt-BR`);
+    })
+    .then(res => res.json())
+    .then(translated => {
+      if (translated && translated.responseData && translated.responseData.translatedText) {
+        el.textContent = translated.responseData.translatedText;
+      } else {
+        // Se a tradução falhar, mostra o original em inglês
+        el.textContent = fatoOriginal;
+      }
     })
     .catch(error => {
       console.error('Erro:', error);
@@ -336,8 +360,8 @@ function initDarkMode() {
 
     btn?.addEventListener("click", () => {
         body.classList.toggle("dm");
-        const icon = btn.querySelector(".dm-icon");
-        if (icon) icon.textContent = body.classList.contains("dm") ? "○" : "◐";
+        const icon = document.getElementById("dock-icon");
+        if (icon) icon.src = body.classList.contains("dm") ? "/Portfolio/img/moon-stars-bold (2).svg" : "/Portfolio/img/sun-bold.svg";
     });
 }
 

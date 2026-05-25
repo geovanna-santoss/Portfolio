@@ -2,7 +2,7 @@
 
 :root {
     /* paleta modo claro */
-    --bg:           #f0ece3;
+    --bg:           #f0ece3e3;
     --bg2:          #e8e3d8;
     --dot-color:    rgba(0,0,0,0.07);
     --win-bg:       #faf8f4;
@@ -356,32 +356,44 @@ html, body {
     margin-bottom: 10px;
 }
 
-/* Grid de informações sobre */
+/* Grid de informações sobre mim*/
 .about-grid {
     display: flex;
-    align-items: center;
-    gap: 14px;
+    flex-direction: column;  
+    align-items: center;     
+    gap: 16px;
+    text-align: center;      
 }
 
 .about-avatar {
-    width: 52px;
-    height: 52px;
+    width: 120px;  
+    height: 120px;
     border-radius: 50%;
     background: var(--accent-bg);
     color: var(--accent);
-    border: 1.5px solid var(--accent);
+    border: 2px solid var(--accent);  
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: var(--font-serif);
-    font-size: 17px;
+    font-size: 32px;
     flex-shrink: 0;
     letter-spacing: 0.02em;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.about-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
 .profile-name {
     font-family: var(--font-serif);
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 400;
     color: var(--text);
     line-height: 1.2;
@@ -390,7 +402,7 @@ html, body {
 
 .profile-title {
     font-family: var(--font-mono);
-    font-size: 11px;
+    font-size: 12px;
     color: var(--accent);
     letter-spacing: 0.04em;
 }
@@ -552,6 +564,61 @@ html, body {
     font-family: var(--font-mono);
     font-size: 10px;
     color: var(--text-hint);
+}
+
+/* Ajustes para ícones Font Awesome nos Links */
+.link-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+}
+
+.link-icon i {
+    font-size: 20px;
+}
+
+.link-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border: 0.5px solid var(--win-border);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    color: var(--text);
+    font-size: 13px;
+    transition: border-color var(--t), background var(--t);
+}
+
+.link-item:hover {
+    border-color: var(--accent);
+    background: var(--accent-bg);
+}
+
+.link-item:hover .link-icon i {
+    color: var(--accent);
+}
+
+/* Ajustes para ícones Font Awesome no Contato*/
+.contact-icon-wrap {
+    width: 36px; 
+    height: 36px;
+    border-radius: 8px;
+    background: var(--tag-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 0.5px solid var(--tag-border);
+}
+
+.contact-icon-wrap i {
+    font-size: 18px;
+    color: var(--accent);
 }
 
 /* Contato */

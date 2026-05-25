@@ -1,10 +1,11 @@
 //  Variáveis com dados pessoais e acadêmicos do perfil
 export const DATA = {
-    name: "Geovanna Santos",
-    jobTitle: "Desenvolvedora de Sistemas",
-    bio: "Estudante de Técnico em Desenvolvimento de Sistemas. Construindo meu primeiro portfólio, buscando soluções de problemas com lógica e tecnologia.",
+    name: "Geovanna Santos Silva",
+    avatar: "/Portfolio/img/profile.jpeg",
+    jobTitle: "Desenvolvedora de Sistemas Júnior",
+    bio: "Estudante de Técnico em Desenvolvimento de Sistemas. \n Fascinada por tecnologia, especialmente por análise e manipulação de dados. Além das habilidades técnicas, sou uma pessoa que valoriza a criatividade, colaboração, inclusão e aprendizado contínuo.",
     gradYear: 2026,
-    skills: ["Python", "HTML e CSS básicos", "JavaScript", "GitHub e Git", "Mysql", "Lógica de programação", "Conhecimento em programação modular"],
+    skills: ["Python", "HTML e CSS básicos", "JavaScript", "GitHub e Git", "Mysql", "Lógica de programação", "Conhecimento em programação modular","Figma"],
     projects: [
     {
         name: "Aplicação de Estacionamento",
@@ -23,24 +24,28 @@ export const DATA = {
     }],
     links: [
     { 
-      icon:"",
+      icon:"fa-brands fa-github",
+      iconColor: "hsl(21, 72%, 56%)",
       name: "GitHub",
       handle: "@geovanna-santoss",
       url: "https://github.com/geovanna-santoss" 
     },
-    { icon:"",
+    { icon: "fa-brands fa-linkedin",
+      iconColor: "hsl(21, 72%, 56%)",
       name: "LinkedIn", 
       handle: "Geovanna Santos",
       url: "https://www.linkedin.com/in/geovanna-santoss"
     },
-    { icon:"",
+    { icon: "fa-brands fa-instagram",
+      iconColor: "hsl(21, 72%, 56%)",
       name: "Instagram", 
       handle: "@adliin.n",
       url: "https://www.instagram.com/adliin.n/"
     }],
 
     contact: [
-    {   icon:"",
+    {   icon: "fa-solid fa-envelope-open-text",
+        iconColor: "hsl(21, 72%, 56%)",
         label: "Email",
         value: "geosant.dev@gmail.com"
     }
