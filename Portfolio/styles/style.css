@@ -93,9 +93,8 @@ html, body {
     border-radius: 50%;
     display: block;
 }
-.tb-dot.red    { background: #ff5f57; }
+.tb-dot.red    { background: #e07840; }
 .tb-dot.yellow { background: #ffbd2e; }
-.tb-dot.green  { background: #28c840; }
 
 .tb-brand {
     font-family: var(--font-mono);
@@ -279,9 +278,8 @@ html, body {
     position: relative;
 }
 .win-titlebar .wbtn:hover { filter: brightness(0.82); }
-.win-titlebar .wbtn.close  { background: #ff5f57; }
+.win-titlebar .wbtn.close  { background: #e07840; }
 .win-titlebar .wbtn.min    { background: #ffbd2e; }
-.win-titlebar .wbtn.maxbtn { background: #28c840; }
 
 .win-title {
     font-size: 12px;

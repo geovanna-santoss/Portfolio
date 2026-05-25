@@ -45,9 +45,8 @@ function openWindow(id) {
 
     win.innerHTML = `
         <div class="win-titlebar">
-            <button class="wbtn close" aria-label="fechar"></button>
-            <button class="wbtn min"   aria-label="minimizar"></button>
-            <button class="wbtn maxbtn" aria-label="maximizar"></button>
+            <button class="wbtn close" aria-label="fechar">×</button>
+            <button class="wbtn min"   aria-label="minimizar">⎻</button>
             <span class="win-title">${cfg.title}</span>
             <span class="win-subtitle">${cfg.sub}</span>
         </div>
@@ -68,7 +67,6 @@ function openWindow(id) {
     // Eventos dos botões da titlebar
     win.querySelector(".wbtn.close").addEventListener("click", () => closeWindow(id));
     win.querySelector(".wbtn.min").addEventListener("click",   () => closeWindow(id));
-    win.querySelector(".wbtn.maxbtn").addEventListener("click",() => toggleMaximize(win));
 
     // Drag & Resize
     makeDraggable(win, win.querySelector(".win-titlebar"));
@@ -119,31 +117,10 @@ function bringToFront(win) {
     win.classList.add("is-active");
 }
 
-// Função para maximizar/restaurar uma janela
-function toggleMaximize(win) {
-    if (win._maximized) {
-        win.style.left   = win._prevStyle.left;
-        win.style.top    = win._prevStyle.top;
-        win.style.width  = win._prevStyle.width;
-        win.style.height = win._prevStyle.height;
-        win._maximized = false;
-    } else {
-        win._prevStyle = {
-            left: win.style.left, top: win.style.top,
-            width: win.style.width, height: win.style.height
-        };
-        win.style.left   = "4px";
-        win.style.top    = "4px";
-        win.style.width  = "calc(100% - 8px)";
-        win.style.height = "calc(100% - 8px)";
-        win._maximized = true;
-    }
-}
-
 // Função para tornar uma janela arrastável 
 function makeDraggable(win, handle) {
     let sx, sy, ox, oy, active = false;
-    // Ignora arrastar ao clicar nos botões da titlebar ou se já estiver maximizada 
+    // Ignora arrastar ao clicar nos botões da titlebar 
     handle.addEventListener("mousedown", e => {
         if (e.target.classList.contains("wbtn")) return;
         if (win._maximized) return;
