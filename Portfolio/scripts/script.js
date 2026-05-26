@@ -214,7 +214,7 @@ function populateAbout(body) {
 
     // Info de formação/tempo
     const elapsed = getTimeElapsed(academicDates.ingresso, getCurrentDate());
-    setTextById(body, "gradYear", `Previsão de formatura: ${DATA.gradYear}`);
+    setTextById(body, "gradYear", `Previsão para minha formatura: ${DATA.gradYear}`);
     setTextById(body, "timeElapsed", `Tempo desde ingresso: ${elapsed.years} anos, ${elapsed.months} meses e ${elapsed.days} dias`);
     setTextById(body, "completionRate", `Progresso estimado: ${getCompletionPercentage(academicDates.ingresso, academicDates.formatura, getCurrentDate())}%`);
     // Condicional de dias restantes para formatura

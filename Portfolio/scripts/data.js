@@ -3,7 +3,7 @@ export const DATA = {
     name: "Geovanna Santos Silva",
     avatar: "/Portfolio/img/profile.jpeg",
     jobTitle: "Desenvolvedora de Sistemas Júnior",
-    bio: "Estudante de Técnico em Desenvolvimento de Sistemas. \n Fascinada por tecnologia, especialmente por análise e manipulação de dados. Além das habilidades técnicas, sou uma pessoa que valoriza a criatividade, colaboração, inclusão e aprendizado contínuo.",
+    bio: "Estudante de Técnico em Desenvolvimento de Sistemas.\n Fascinada por tecnologia, especialmente por análise, manipulação e interpretação de dados. Além das habilidades técnicas, sou uma pessoa que valoriza a criatividade, colaboração, inclusão e aprendizado contínuo. \n Fora do código, você me encontra lendo, fazendo crochê ou explorando diferentes formas de arte. Acredito que meus hobbies me auxiliam a desenvolver abordagens criativas para resolução de problemas, além de reforçar a atenção aos detalhes que busco aplicar em todos os meus projetos, sejam eles pessoais ou profissionais.",
     gradYear: 2026,
     skills: ["Python", "HTML e CSS básicos", "JavaScript", "GitHub e Git", "Mysql", "Lógica de programação", "Conhecimento em programação modular","Figma"],
     projects: [
@@ -33,8 +33,8 @@ export const DATA = {
     { icon: "fa-brands fa-linkedin",
       iconColor: "hsl(21, 72%, 56%)",
       name: "LinkedIn", 
-      handle: "Geovanna Santos",
-      url: "https://www.linkedin.com/in/geovanna-santoss"
+      handle: "@geovanna-santos",
+      url: "https://www.linkedin.com/in/geovanna-santos-221552411"
     },
     { icon: "fa-brands fa-instagram",
       iconColor: "hsl(21, 72%, 56%)",
